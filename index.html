@@ -41,20 +41,73 @@
                 <img src="img/Logo.png" id="logo">
             </figure>
             <nav>
-                <a href="index.html"><strong>Home</strong></a>
-                <a href="contact.html"><strong>News</strong></a>
-                <a href="contact.html"><strong>Languages</strong></a>
-                <a href="contact.html"><strong>Courses</strong></a>
+                <a href=""><strong>Home</strong></a>
+                <a href=""><strong>News</strong></a>
+                <a href=""><strong>Languages</strong></a>
+                <a href=""><strong>Courses</strong></a>
             </nav>
         </section>
         <section class="section-2">
-            <a href="contact.html"></a>
-        </section>
-        <section class="section-3">
-            <a href="contact.html"></a>
-        </section>
-        <section class="section-4">
-            <a href="contact.html"></a>
+            <div class="intro">
+                <figure class="TI"></figure>
+                <img src="img/JavaMP.png" id="MP">
+                </figure>
+                <h1>Asynchronous Programming in JavaScript</h1>
+                <p>
+                    Asynchronous programming is essential in JavaScript due to its non-blocking nature. Although
+                    JavaScript is a single-threaded language and is not asynchronous by itself, it manages to handle
+                    multiple tasks simultaneously thanks to the event loop and environment APIs (such as browsers or
+                    Node.js). These allow long operations, such as network requests, to run in the background while the
+                    code continues its normal execution, preventing the main thread from being blocked. After
+                    understanding how JavaScript manages to handle asynchrony, it is important to delve into the
+                    different techniques and tools that allow us to work with asynchronous tasks efficiently.</p>
+            </div>
+            <div class="top1">
+                <section class="explain">
+                    <h1>1. JavaScript Async</h1>
+                    <p>
+                        Asynchronous JavaScript allows code to run without waiting for certain operations, such as HTTP
+                        requests or timers, to complete. Unlike other languages ​​where long operations block execution,
+                        JavaScript uses a non-blocking asynchronous approach, managing tasks so that the flow of the
+                        program is not interrupted. This is possible thanks to the event loop, which controls when to
+                        execute certain tasks in the background and when to resume other tasks that require more time.
+                    </p>
+                </section>
+                <section class="codexample">
+                    <div class="codepack">
+                        Basic Example:
+                        <pre><code>
+    console.log("Start");
+
+    setTimeout(() => {
+      console.log("Asynchronous task complete!");
+    }, 2000); // 2 seconds delay
+                            
+        console.log("End");
+                        </code></pre>
+                        Output:
+                        <pre><code>
+    Start
+    End
+    Asynchronous task complete!
+                    </code></pre>
+                    </div>
+                    <div class="textbox">
+                        <p>First, console.log("Start") is executed immediately.
+                            Then setTimeout introduces an asynchronous task with a delay of 2 seconds. This task does
+                            not
+                            block the main thread, so the following console.log("End") is executed immediately.</p>
+                        <p>After 2 seconds, the setTimeout task completes and its callback is executed, printing
+                            "Asynchronous task completed!".</p>
+                        <p>
+                            This behavior reflects how JavaScript allows code to continue running without waiting for
+                            asynchronous tasks to complete. Asynchrony in JavaScript is essential when working with
+                            network
+                            operations, timers, or any task that cannot be completed instantly.</p>
+                    </div>
+                </section>
+
+            </div>
         </section>
         <footer class="footer">
             <section class="socialnet">
