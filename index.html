@@ -62,7 +62,7 @@
                     understanding how JavaScript manages to handle asynchrony, it is important to delve into the
                     different techniques and tools that allow us to work with asynchronous tasks efficiently.</p>
             </div>
-            <div class="top1">
+            <div class="top">
                 <section class="explain">
                     <h1>1. JavaScript Async</h1>
                     <p>
@@ -106,7 +106,234 @@
                             operations, timers, or any task that cannot be completed instantly.</p>
                     </div>
                 </section>
+            </div>
+            <div class="top">
+                <section class="explain">
+                    <h1>2. CallBack</h1>
+                    <p>
+                        A callback is a function that is passed as an argument to another function and is executed when
+                        the main task finishes. This pattern was one of the first ways to handle asynchronous operations
+                        in JavaScript. Although effective, callbacks can become unwieldy when multiple asynchronous
+                        operations are nested, known as "callback hell."
 
+                    </p>
+                </section>
+                <section class="codexample">
+                    <div class="codepack">
+                        Basic Example:
+                        <pre><code>
+    function fetchData(callback) {
+        setTimeout(() => {
+          console.log("Data fetched");
+          callback(); // Call the callback once data is fetched
+            }, 2000); // Simulating a 2-second delay
+    }
+                              
+    function processData() {
+        console.log("Processing data");
+    }
+                              
+    fetchData(processData); // Passing processData as a callback
+                        </code></pre>
+                    </div>
+                    <div class="textbox">
+                        <ul>
+                            <li>
+                                The fetchData function simulates data fetching with a 2-second setTimeout.
+                            </li>
+                            <li>
+                                After the delay, it logs "Data fetched" and then calls the callback() (in this case,
+                                processData).
+                            </li>
+                            <li>
+                                Once the data is "fetched," processData is executed, printing "Processing data."
+                            </li>
+                        </ul>
+                        <p>
+                            While useful for simple tasks, callbacks can make the code harder to read and maintain when
+                            you
+                            have multiple asynchronous operations.</p>
+                </section>
+            </div>
+            <div class="top">
+                <section class="explain">
+                    <h1>3. Promise</h1>
+                    <p>
+                        A Promise is an object that represents the eventual completion (or failure) of an asynchronous
+                        operation. Promises provide a cleaner and more structured way to handle multiple asynchronous
+                        tasks, avoiding the nested structure of callbacks. Promises have three states:
+                    </p>
+                    <ul>
+                        <li>
+                            Pending: The operation hasn’t completed yet.
+                        </li>
+                        <li>
+                            Fulfilled: The operation was successful.
+                        </li>
+                        <li>
+                            Rejected: The operation failed.
+                        </li>
+                    </ul>
+                </section>
+                <section class="codexample">
+                    <div class="codepack">
+                        Basic Example:
+                        <pre><code>
+    function fetchData() {
+        return new Promise((resolve, reject) => {
+             setTimeout(() => {
+                const success = true; // Simulate success or failure
+                if (success) {
+                  resolve("Data fetched successfully");
+                } else {
+                  reject("Error fetching data");
+                }
+                  }, 2000);
+                });
+              }
+                              
+      fetchData()
+        .then((message) => {
+            console.log(message); // "Data fetched successfully"
+        })
+        .catch((error) => {
+           console.log(error); // Handle error
+        });
+                                  
+                        </code></pre>
+                    </div>
+                    <div class="textbox">
+                        <ul>
+                            <li>
+                                fetchData returns a promise. Inside the promise, a 2-second asynchronous operation is
+                                simulated.
+                            </li>
+                            <li>
+                                If the success variable is true, resolve is called, and the promise is fulfilled,
+                                triggering the then block.
+                            </li>
+                            <li>
+                                If success is false, reject is called, which triggers the catch block to handle the
+                                error.
+                            </li>
+                        </ul>
+                        <p>
+                            Promises offer a more structured way to handle asynchronous operations and prevent the
+                            issues of deeply nested callbacks.</p>
+
+                </section>
+            </div>
+            <div class="top">
+                <section class="explain">
+                    <h1>4. Async/Await</h1>
+                    <p>
+                        Async and await are more modern syntax to work with promises, making asynchronous code look more
+                        like synchronous code. async turns a function into a promise, and await pauses the execution of
+                        the function until the promise is resolved or rejected. This allows you to write asynchronous
+                        code that’s easier to read and understand.
+                    </p>
+                </section>
+                <section class="codexample">
+                    <div class="codepack">
+                        Basic Example:
+                        <pre><code>
+    function fetchData() {
+        return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                const success = true;
+                if (success) {
+                      resolve("Data fetched");
+                } else {
+                      reject("Error");
+                }
+              }, 2000);
+            });
+        }
+                              
+    async function processData() {
+        try {
+            const data = await fetchData(); // Waits for fetchData to resolve
+            console.log(data); // "Data fetched"
+        } catch (error) {
+            console.log(error); // If fetchData fails, catch handles the error
+        }
+    }
+                              
+    processData();   
+                        </code></pre>
+                    </div>
+                    <div class="textbox">
+                        <ul>
+                            <li>
+                                fetchData returns a promise.
+                            </li>
+                            <li>
+                                processData is declared with async, allowing it to use await inside.
+                            </li>
+                            <li>
+                                await fetchData() pauses processData until fetchData is resolved, making the code more
+                                readable.
+                            </li>
+                            <li>
+                                If the promise resolves successfully, console.log(data) runs. If it fails, the catch
+                                block handles the error.
+                            </li>
+                        </ul>
+                        <p>This syntax simplifies asynchronous code, especially when there are multiple chained
+                            promises.</p>
+
+                </section>
+            </div>
+            <div class="top">
+                <section class="explain">
+                    <h1>5. Event Loop</h1>
+                    <p>
+                        The event loop is the mechanism that allows JavaScript to handle asynchronous tasks and be
+                        non-blocking. The key to understanding the event loop is knowing that JavaScript has a call
+                        stack (where functions are placed to be executed) and a task queue (where asynchronous tasks,
+                        like callbacks, are placed to be executed after the stack is clear).</p>
+                    <p>
+                        When an asynchronous operation is performed, it is placed in the task queue. The event loop
+                        continuously monitors the call stack, and once it’s empty, it picks tasks from the queue and
+                        executes them.
+                    </p>
+                </section>
+                <section class="codexample">
+                    <div class="codepack">
+                        Basic Example:
+                        <pre><code>
+    console.log("Start");
+
+    setTimeout(() => {
+        console.log("Asynchronous task");
+    }, 0);
+                                                    
+    console.log("End");                     
+                        </code></pre>
+                    </div>
+                    <div class="textbox">
+                        <ul>
+                            <li>
+                                First, console.log("Start") runs immediately.
+                            </li>
+                            <li>
+                                Then, setTimeout with a 0ms delay is placed in the task queue but doesn’t execute
+                                immediately because the call stack is still active.
+                            </li>
+                            <li>
+                                console.log("End") executes before the setTimeout task because it’s on the call stack.
+                            </li>
+                            <li>
+                                Finally, the event loop picks up the setTimeout callback and executes it, printing
+                                "Asynchronous task."
+                            </li>
+                        </ul>
+                        <p>
+                            Even with a 0ms delay, the setTimeout callback is executed after the synchronous code
+                            because the event loop ensures that the stack is clear before executing tasks from the
+                            queue.</p>
+
+                </section>
             </div>
         </section>
         <footer class="footer">
